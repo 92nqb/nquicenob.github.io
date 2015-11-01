@@ -3,8 +3,15 @@ title: About
 permalink: /about/
 ---
 
-<p class="lead"><a href="http://github.com/gfjaru/Kiko">Kiko</a> is a theme for <a href="http://jekyllrb.com">Jekyll</a>, the static site generator.</p>
+<p class="lead">
+Soy un informatico atopico, apasionado de la programación. 
+</p>
 
-Kiko is simple, lightweight theme. It's designed and developed by [@gfjaru](https://twitter.com/gfjaru).
+Pudes contactar conmigo en:
+* En Github [@nquicenob](https://github.com/nquicenob)
+* En Twitter [@nquicenob](https://twitter.com/nquicenob)
+* En [linkedin](https://es.linkedin.com/in/nquiceno)
+* [nquicenob@gmail.com](nquicenob@gmail.com)
+
 
 
