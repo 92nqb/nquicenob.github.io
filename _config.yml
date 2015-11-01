@@ -3,12 +3,15 @@
 # # # # # # # #
 
 # Basic
-name:               "Kiko"
+name:               "Nicolas Quiceno Benavides"
 
 # URL
 baseurl:            ""
 #baseurl:            "" #For Root Domain
 permalink:          /:year/:month/:day/:title.html
+
+twitter_username: nquicenob
+github_username:  nquicenob
 
 # Markdown
 markdown:           rdiscount
