@@ -1,10 +1,10 @@
 ---
-title: About
-permalink: /about/
+title: About me
+permalink: /about-me/
 ---
 
 <p class="lead">
-Soy un informatico atopico, apasionado de la programación. 
+Soy un informatico atopico.
 </p>
 
 Pudes contactar conmigo en:
