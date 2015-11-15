@@ -1,5 +1,5 @@
 ---
-title: Jugando con el contexto en JS, ¿Cuánto vale result?
+title: Jugando con el contexto en JS. ¿Cuánto vale result?
 ---
 
 Una de las cosas que al principio resultan más extrañas para un desarrollador que se aventura en JS es el valor que tiene **this** dentro de una función. Jugando con este tema elaboré un problema para picar a un amigo. Antes de ver el problema explicaré muy brevemente algunos conceptos: 
