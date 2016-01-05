@@ -360,7 +360,7 @@ Como última recomendación utilizar **SIEMPRE** una librería que cumpla el est
 
 Más información.
 
-* [estándar A+](https://promisesaplus.com/)
+* [Estándar A+](https://promisesaplus.com/)
 * [Página](https://www.promisejs.org/) de información general sobre promesas
 * [Articulo](http://www.mattgreer.org/articles/promises-in-wicked-detail/) par entender como funcionan las promesas por dentro
 * Librería [rsvp](https://github.com/tildeio/rsvp.js)
