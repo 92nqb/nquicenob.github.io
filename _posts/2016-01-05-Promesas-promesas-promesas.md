@@ -362,7 +362,7 @@ Más información.
 
 * [Estándar A+](https://promisesaplus.com/)
 * [Página](https://www.promisejs.org/) de información general sobre promesas
-* [Articulo](http://www.mattgreer.org/articles/promises-in-wicked-detail/) par entender como funcionan las promesas por dentro
+* [Articulo](http://www.mattgreer.org/articles/promises-in-wicked-detail/) para entender como funcionan las promesas por dentro
 * Librería [rsvp](https://github.com/tildeio/rsvp.js)
 * Diseño de la [librería q](https://github.com/kriskowal/q/blob/v1/design/README.js)
 * [NodeSchool Workshopper - Promise It Won't Hurt](https://github.com/stevekane/promise-it-wont-hurt) (más que recomendable)
