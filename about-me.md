@@ -4,7 +4,7 @@ permalink: /about-me/
 ---
 
 <p class="lead">
-Soy un informatico atopico.
+Me llamo Nicolas Quiceno y soy un apasionado de la programación, me enfoco principalmente en el desarrollo web y en este blog iré compartiendo mis conocimientos, reflexiones e inquietudes.
 </p>
 
 Pudes contactar conmigo en:
