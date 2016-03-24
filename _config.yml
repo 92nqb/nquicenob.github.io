@@ -14,7 +14,7 @@ twitter_username: nquicenob
 github_username:  nquicenob
 
 # Markdown
-markdown:           rdiscount
+markdown:           kramdown
 
 # Navigation
 nav:
