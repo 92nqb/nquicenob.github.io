@@ -2,14 +2,14 @@
 title: Jugando con el contexto en JS. ¿Cuánto vale result?
 ---
 
-Una de las cosas que al principio resultan más extrañas para un desarrollador que se aventura en JS es el valor que tiene **this** dentro de una función. Jugando con este tema elaboré un problema para picar a un amigo. Antes de ver el problema explicaré muy brevemente algunos conceptos: 
+Una de las cosas que al principio resultan más extrañas para un desarrollador que se aventura en JS es el valor que tiene **this** dentro de una función. Jugando con este tema elaboré un problema para picar a un amigo. Antes de ver el problema explicaré muy brevemente algunos conceptos:
 
 * **El valor de this** será siempre lo que esté justo antes del '.' a la hora de invocar una función, si no hubiera nada antes del '.', el valor de this pasaría a ser **global** o **windows** según el caso. Por ejemplo:
 
 {% highlight js %}
 
-obj.fn(); // this  es obj 
-fn(); // this es global o window 
+obj.fn(); // this  es obj
+fn(); // this es global o window
 
 {% endhighlight %}
 
@@ -40,9 +40,9 @@ fn(); // this es global o window
 function CreateA(){
   this.a = 'a';
 }
-var obj1 = CreateA();// obj es undefined, 
-// window o global parsarian a tener la 
-// propiedad a con valor 'a' 
+var obj1 = CreateA();// obj es undefined,
+// window o global parsarian a tener la
+// propiedad a con valor 'a'
 var obj2 = new CreateA(); // obj es CreateA { a: 'a' }
 
 {% endhighlight %}
@@ -123,13 +123,13 @@ var val1 = changeCtx(obj2.result)(obj1);
 
 // 1. changeCtx
 function changeCtx(cb){
-  var self = this; // guarda el valor de this en la 
-  // variable self, como hemos visto antes no hay nada 
-  // delante de la invocación de changeCtx, por lo tanto 
+  var self = this; // guarda el valor de this en la
+  // variable self, como hemos visto antes no hay nada
+  // delante de la invocación de changeCtx, por lo tanto
   // this será global
-  return function(obj){ 
-    return cb.call(self, obj); // Devuelve otra función 
-    // que ejecuta el callback de la primera llamada 
+  return function(obj){
+    return cb.call(self, obj); // Devuelve otra función
+    // que ejecuta el callback de la primera llamada
     // con el contexto global, por lo tanto,
     // ejecutamos obj2.result con el contexto de self y
     // como parámetro obj1
@@ -141,31 +141,30 @@ function ClassObj(param1, param2, param3, param4){
   // ..
   this.result = (function(p4){
     // esta función es un poco especial ya que es
-    // auto-invocada y almacena param4 en la variable secret 
+    // auto-invocada y almacena param4 en la variable secret
     // cuando se construye un nuevo objeto
     var secret = p4;
     return function(ctx){
-      // Esta función es la más compleja, ya que trabaja 
-      // con tres contextos distintos:
-      // 1. this, que al ser invocada dentro de changeCtx pasa 
-      // a ser self que a su vez es global
-      // 2. ctx, que es el contexto que llega como parámetro y se usa 
-      // para llamar a la función add
-      // 3. El contexto del objeto al que pertenece result
-      // Por lo tanto:
-      
-      // secret es -4, ya que es la única variable que pertenece al 
-      // objeto propietario de result, en este caso obj2
-
-      // this.c es 0, ya que es lo mismo que global.c
-
-      // add ejecuta la suma de this.a + this.b, pero llamamos a 
-      // add mediante call, que como sabemos cambia el 
-      // contexto de la invocación, 
-      // siendo este ctx que a su vez es obj1 {a: 1, b: 2, c: 3, d: 4}
-      // así que add suma 1 + 2
-    
-      // 0 + (1 + 2) + (-4)
+    // Esta función es la más compleja, ya que trabaja
+    // con tres contextos distintos:
+    // 1. this, que al ser invocada dentro de changeCtx pasa
+    // a ser self que a su vez es global
+    // 2. ctx, que es el contexto que llega como
+    // parámetro y se usa
+    // para llamar a la función add
+    // 3. El contexto del objeto al que pertenece result
+    // Por lo tanto:
+    // secret es -4, ya que es la única variable que
+    // pertenece al objeto propietario de result,
+    // en este caso obj2
+    // this.c es 0, ya que es lo mismo que global.c
+    // add ejecuta la suma de this.a + this.b, pero llamamos a
+    // add mediante call, que como sabemos cambia el
+    // contexto de la invocación,
+    // siendo este ctx que a su vez es obj1
+    // {a: 1, b: 2, c: 3, d: 4}
+    // así que add suma 1 + 2
+    // 0 + (1 + 2) + (-4)
       return this.c + add.call(ctx) + secret;      
     }
   })(param4);
@@ -210,8 +209,8 @@ function ClassObj(param1, param2, param3, param4){
 // ...
 
 var obj3 = ClassObj(4, 3, 2, 1);
-// Ahora global pasa a tener las propiedades que se asignan 
-// mediante this dentro de ClassObj, es decir, 
+// Ahora global pasa a tener las propiedades que se asignan
+// mediante this dentro de ClassObj, es decir,
 // global = { ..., a: 4, b:3, c:2 }
 // y la operación tendría estos valores
 

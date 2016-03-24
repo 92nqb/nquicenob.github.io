@@ -7,7 +7,7 @@ Para poder desarrollar JS una de las cosas que tienes que entender y por entende
 ### ¿Qué es un Promesa?
 
 Una promesa es objeto que representa el estado de una operación asíncrona y permite asociar acciones al resultado de dicha operación.
-Actualmente hay un [estándar](https://promisesaplus.com/) que especifica el funcionamiento de una promesa, dicho estándar cuenta con una serie de [test](https://github.com/promises-aplus/promises-tests) que deberá pasar una librería de promesas para demostrar que cumple con el. 
+Actualmente hay un [estándar](https://promisesaplus.com/) que especifica el funcionamiento de una promesa, dicho estándar cuenta con una serie de [test](https://github.com/promises-aplus/promises-tests) que deberá pasar una librería de promesas para demostrar que cumple con el.
 
 ### Caracteristicas de las promesas
 
@@ -72,8 +72,9 @@ $ajaxRequest.get({
 {% endhighlight %}
 
 Pasar una función como parámetro permite pasar una acción para ejecutar de manera asíncrona, en este caso cuando la petición termine.
-Una descripción poco tecnica del código anterior sería: 
-> haz una peticion a la url "_https://www.googleapis.com_" y cuando te devuelvan el resultado ejecuta esta función".
+Una descripción poco tecnica del código anterior sería:
+
+> haz una peticion a la url _"https://www.googleapis.com"_ y cuando te devuelvan el resultado ejecuta esta función".
 
 Ahora bien, si quisiéramos lanzar 3 peticiones que se encolen, de manera que no se realiza la siguiente hasta que no hayamos obtenido el resultado de la anterior, tendríamos que hacer algo así:
 
@@ -126,11 +127,11 @@ var $ajaxRequest = (function () {
       function handlerState(){
         if (this.readyState === 4) {
           // resolve o reject the promise
-          this.status === 200 ? 
-            resolve(this.responseText) : reject(this.responseText)
+          this.status === 200 ?
+            resolve(this.responseText) :
+            reject(this.responseText)
         }
       }
-        
       request.onreadystatechange = handlerState;
       request.open(requestParams.method, requestParams.url);
       request.send();
@@ -166,7 +167,7 @@ $ajaxRequest.get({
 {% endhighlight %}
 
 Para entender este código vamos a empezar por explicar el método **then** de un objeto promise.
-  
+
 ### Then
 
 El método **then** nos permite añadir acciones a una cola que se ejecutarán en el orden en el que las definimos cuando la promesa cambie su estado.
@@ -179,7 +180,7 @@ Ahora vamos a ver en detalle las características de los callback **onFulfilled*
 
 Los callback **onFulfilled** o **onRejected** esperan un parámetro de entrada y este puede ser:
 
-* Si son los primeros callback de la cola, el parámetro que reciben será el argumento que se pasó al método _resolve_ o _reject_ de la promesa, que en nuestro caso es el resultado de la petición: 
+* Si son los primeros callback de la cola, el parámetro que reciben será el argumento que se pasó al método _resolve_ o _reject_ de la promesa, que en nuestro caso es el resultado de la petición:
 
 {% highlight js %}
 var $ajaxRequest = (function () {
@@ -190,7 +191,7 @@ var $ajaxRequest = (function () {
       function handlerState(){
         if (this.readyState === 4) {
         // resolve o reject the promise
-          this.status === 200 ? 
+          this.status === 200 ?
             resolve(this.responseText) : reject(this.responseText)
         }
         // ...
@@ -213,11 +214,11 @@ var $ajaxRequest = (function () {
 
 {% highlight js %}
 function firstThen(response){
-  //... first fulfillment handler in queue 
+  //... first fulfillment handler in queue
   return valueFirst;
 }
 function secondThen(valueFirst){
-  //... second fulfillment handler in queue 
+  //... second fulfillment handler in queue
 }
 $ajaxRequest.get({
   url: 'https://www.googleapis.com/0'
@@ -240,7 +241,7 @@ $ajaxRequest.get({
 });
 {% endhighlight %}
 
-La variable **secondResponse** contendrá el valor devuelto por la petición a '_https://www.googleapis.com/1_' esto es llamado **assimilation** y es lo que nos permite encolar las peticiones ya que el siguiente callback de la cola no se ejecuta hasta que la promesa devuelta por el anterior haya cambiado de estado a _fulfilled_ o _rejected_.
+La variable **secondResponse** contendrá el valor devuelto por la petición a _'https://www.googleapis.com/1'_ esto es llamado **assimilation** y es lo que nos permite encolar las peticiones ya que el siguiente callback de la cola no se ejecuta hasta que la promesa devuelta por el anterior haya cambiado de estado a _fulfilled_ o _rejected_.
 
 Volviendo al ejemplo de código inicial:
 {% highlight js %}
@@ -256,10 +257,10 @@ $ajaxRequest.get({
 
 
 Una explicación poco técnica podría ser:
-> Realiza una petición a la url "_https://www.googleapis.com/0_" y devuelveme un objeto al que le digas el resultado, cuando el objeto sepa el resultado entonces ejecutará esta función y despues esta otra ... .
+> Realiza una petición a la url _"https://www.googleapis.com/0"_ y devuelveme un objeto al que le digas el resultado, cuando el objeto sepa el resultado entonces ejecutará esta función y despues esta otra ... .
 
 Por último es importante destacar que aunque la operación que realizamos sea síncrona la ejecución del callback del método then será siempre asíncrona, esto es descrito en la especificación A/+:
- 
+
 > Here “platform code” means engine, environment, and promise implementation code. In practice, this requirement ensures that onFulfilled and onRejected execute asynchronously, after the event loop turn in which then is called, and with a fresh stack. This can be implemented with either a “macro-task” mechanism such as setTimeout or setImmediate, or with a “micro-task” mechanism such as MutationObserver or process.nextTick. Since the promise implementation is considered platform code, it may itself contain a task-scheduling queue or “trampoline” in which the handlers are called.
 
 Esto traducido a código significa que:
@@ -268,17 +269,17 @@ Esto traducido a código significa que:
 var promise = new RSVP.Promise(function(resolve, reject){
   resolve("FIRST");
 });
-  
+
 promise.then(function(result){
   console.log(result);
 });
-  
+
 console.log("SECOND");
 {% endhighlight %}
 
 Lo primero que veremos en consola será:
-> "SECOND" 
-y lo siguiente 
+> "SECOND"
+y lo siguiente
 > "FIRST"
 
 Esta ejecución en asíncrono en el caso de la librería **rsvp** la realiza la función  _asap_ que elige la manera de encolar las peticiones en función de la plataforma, navegador, etc.
@@ -319,12 +320,12 @@ Hay que tener cuidado de no caer en el error de pensar que es correcto hacer est
 function errorHandler(reason){
   // ...
 }
-  
+
 function successHandler(value){
   // ...
   throw new Error("NO CATCH");
 }
-  
+
 new RSVP.Promise(function(resolve, reject){
   // resolve o reject promise
 }).then(successHandler, errorHandler);
@@ -366,13 +367,3 @@ Más información.
 * Librería [rsvp](https://github.com/tildeio/rsvp.js)
 * Diseño de la [librería q](https://github.com/kriskowal/q/blob/v1/design/README.js)
 * [NodeSchool Workshopper - Promise It Won't Hurt](https://github.com/stevekane/promise-it-wont-hurt) (más que recomendable)
-
-
-
-
-
-
-
-
-
-
