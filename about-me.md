@@ -9,7 +9,7 @@ Me llamo Nicolas Quiceno y soy un apasionado de la programación, me enfoco prin
 
 Pudes contactar conmigo en:
 
-* En Github [@nquicenob](https://github.com/nquicenob)</li> 
-* En Twitter [@nquicenob](https://twitter.com/nquicenob)</li> 
-* En [linkedin](https://es.linkedin.com/in/nquiceno)</li> 
-* [nquicenob@gmail.com](mailto:nquicenob@gmail.com)</li> 	
+* En Github [@nquicenob](https://github.com/nquicenob)
+* En Twitter [@nquicenob](https://twitter.com/nquicenob)
+* En [linkedin](https://es.linkedin.com/in/nquiceno)
+* [nquicenob@gmail.com](mailto:nquicenob@gmail.com) 	
