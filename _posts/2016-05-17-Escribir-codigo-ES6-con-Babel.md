@@ -7,7 +7,7 @@ Recientemente se ha liberado la version la [version 6.0 de Node](https://nodejs.
 **Babel** es un compilador *source-to-source* también llamado *transpilador*, en lo práctico quiere decir que podemos escribir código en ES6 y decirle a Babel que nos transpile a código javascript compatible (ej: ES5.1).
 Después de esta breve explicación, vamos a ver cómo trabajar con Babel.
 
-Para este ejemplo, primero vamos a crear la estructura del proyecto:
+Para este ejemplo, primero vamos a crear la siguiente estructura de directorios:
 
 <pre>
 .
@@ -17,7 +17,7 @@ Para este ejemplo, primero vamos a crear la estructura del proyecto:
 └── package.json     # Project settings
 </pre>
 
-Como podemos ver nuestro código en ES6 lo escribiremos en el directorio `/src` y Babel nos volcara el código transpilado en el directorio llamado `/lib`, también es habitual para este directorio el nombre de `/build` o de `/dist`.
+Como podemos ver nuestro código en ES6 lo escribiremos en el directorio `/src`, Babel será el encargado de volcar el código transpilado en el directorio llamado `/lib`, también es habitual para este directorio el nombre de `/build` o de `/dist`.
 
 Una vez creada nuestra estructura de directorios, añadimos Babel a las `devDependencies` de nuestro `package.json`.
 
@@ -28,7 +28,7 @@ $ npm install babel-cli --save-dev
 `babel-cli` trae consigo un varias utilidades, entre ellas:
 
 * **babel.js** que nos da como salida el código transpilado. En la versión **^6.0** de `babel-cli`, `babel.js` se encuentra en `/node_modules/babel-cli/bin/babel.js`.
-* **babel-node** que es un interprete, es decir, ejecuta el código sin transpilar previamente. En la versión **^6.0** de `babel-cli` podemos encontrarlo en `./node_modules/babel-cli/bin/babel-node.js`.
+* **babel-node** que es un intérprete, es decir, ejecuta el código sin transpilar previamente. En la versión **^6.0** de `babel-cli` podemos encontrarlo en `./node_modules/babel-cli/bin/babel-node.js`.
 
 Para las pruebas de este post partiremos de un archivo llamado `/main.js` ubicado en `/src`:
 
@@ -85,7 +85,7 @@ $ npm install babel-preset-es2015 --save-dev
 
 Un `present` es un conjunto de plugins.
 
-Una vez terminada la instalación, le decimos a Babel que haga uso del mismo, para ello creamos un archivo `/.babelrc` con la configuración que tiene que usar al transpilar, esta configuración también puede ir por parámetro (no recomendado). El contenido de `/.babelrc` ha de ser el siguiente:
+Una vez terminada la instalación, le decimos a Babel que haga uso del mismo, para ello creamos un archivo `/.babelrc` con la configuración que tiene que usar al transpilar. El contenido de `/.babelrc` ha de ser el siguiente:
 
 {% highlight json %}
 {
@@ -116,7 +116,9 @@ Vamos a probar a transpilar, para ello ejecutamos:
 $ ./node_modules/babel-cli/bin/babel.js src/main.js -o lib/main.js
 </pre>
 
-Se ha debido de crear un archivo llamado `/lib/main.js`. El comando anterior sería conveniente llevarlo a un script en nuestro `package.json`:
+Se ha debido de crear un archivo llamado `/lib/main.js`.
+
+El comando anterior sería conveniente llevarlo a un script en nuestro `package.json`:
 
 {% highlight json %}
 {
@@ -131,7 +133,7 @@ El parámetro `-d` le indica a babel que tiene que transpilar el directorio comp
 {% highlight json %}
 {
   "scripts": {
-    "clean": "rm -rf lib/*",
+    "clean": "rm -rf lib/* ",
     "compile": "npm run clean && babel src -d lib"
   }
 }
@@ -187,7 +189,7 @@ hello world
 { value: 3, done: false }
 </pre>
 
-Ahora bien, con `babel-polyfill` como hemos dicho tendríamos a nivel global estas transformaciones de código, las cosas globales no suelen ser de buen gusto, si queremos disponer de estas transformaciones sólo a nivel de nuestro `/main.js` debemos hacer uso de otros plugins.
+Ahora bien, con `babel-polyfill` tendríamos a nivel global estas transformaciones de código, las cosas globales no suelen ser de buen gusto, si queremos disponer de estas transformaciones sólo a nivel de nuestro `/main.js`, debemos hacer uso de otro plugin.
 
 Primero eliminamos a `babel-polyfill` de nuestras `dependencies`:
 
@@ -239,8 +241,54 @@ hello world
 </pre>
 
 Si abrimos nuestro archivo transpilado en `lib/main.js`, veremos cómo importa de `babel-runtime` alguna funcionalidad, en lugar de ser añadida de manera global a los objetos.
-Espero que sea de utilidad :).
 
+### Algunas recomendaciones
+
+#### A la hora de configurar babel
+
+A la hora de transpilar código con Babel, debemos tener en cuenta:
+
+  * Las características de ES6 que soporta nuestro motor de JS.
+  * Las características de ES6 que queremos usar.
+
+Estas consideraciones nos permitirán quitar plugins a los que no les damos uso, llegando incluso a quitar el plugin de `transform-runtime` o el `babel-polyfill` y asi obtener un proyecto mucho más ligero y con las dependencias mínimas :).
+
+#### Extra 1
+
+Si lo que queremos es hacer una librería para después importarla en nuestro código JS en ES5, deberíamos considerar el uso de usar el plugin de `babel-plugin-add-module-exports` para que no tengamos que añadir el feo `default`.
+
+Ej:
+
+{% highlight js %}
+// sin babel-plugin-add-module-export
+var myES6library = require('es6-library').default;
+// ...
+
+// con babel-plugin-add-module-export
+var myES6library = require('es6-library');
+// ...
+{% endhighlight %}
+
+En la configuración de .babelrc hemos de definir este en primer lugar:
+
+<pre>
+{
+  "plugins": [
+    "add-module-exports",
+    "transform-es2015-destructuring",
+    "transform-es2015-computed-properties",
+    "transform-es2015-block-scoping",
+    "transform-es2015-arrow-functions",
+    "transform-es2015-modules-commonjs"
+  ]
+}
+</pre>
+
+#### Extra 2
+
+La configuración de babel también puede ir en nuestro package.json.
+
+Espero que os sea de utilidad.
 
 Más información.
 
