@@ -12,11 +12,11 @@ Según esta el patio, un proyecto JS no es molón si no tiene por lo menos un _t
 
 Igual que borramos directorios y archivos, muchas veces tenemos que crearlos, con [mkdirp](https://github.com/substack/node-mkdirp) podemos crear directorios recursivamente igual que con el comando `mkdir -p`.
 
-### 3. ["cross-env"](https://github.com/kentcdodds/cross-env). Variables de entorno en 'Unix style' para cualquier SO(incluido windows)
+### 3. ["cross-env"](https://github.com/kentcdodds/cross-env). Variables de entorno en 'Unix style' para cualquier SO (incluido windows)
 
 Aunque sea duro de decir, existe gente que no puede o quiere trabajar en sistemas operativos, véase [windows](https://www.microsoft.com/es-es/windows)   >:P, y esto nos crea la necesidad de poder definir variables de entorno de manera independiente a la plataforma que estemos usando. Por suerte para nosotros llega [cross-env](https://github.com/kentcdodds/cross-env), con esta micro librería podamos definir variables de entorno independientemente del SO en el que estemos ejecutando nuestra app.
 
-### 4. ["shelljs"](https://github.com/shelljs/shelljs). Comandos Unix para nodejs en cualquier SO(incluido windows)
+### 4. ["shelljs"](https://github.com/shelljs/shelljs). Comandos Unix para nodejs en cualquier SO (incluido windows)
 
 Si nuestro proyecto tiene una gran carga de tareas repetitivas, querremos automatizarlas, para ello podemos elegir un gestor de tareas tipo gulp o venirnos arriba y hacer scripting. El problema del scripting es el de siempre, la portabilidad entre diferentes SO, con [shelljs](https://github.com/shelljs/shelljs) podemos hacer uso de un gran abanico de comandos _unix_ desde _node_ y con la garantía de que funcionarán independientemente del SO en el que se ejecuten.
 
