@@ -1,5 +1,5 @@
 ---
-title: 8 paquetes de npm para que tu vida sea más fácil
+title: 8 paquetes de npm que harán tu vida más fácil
 ---
 
 El ecosistema de **node js** es una auténtica locura, es increíble el ritmo al que se mueve la comunidad y la cantidad de librerías y herramientas que se publican todos los días. Aquí os traigo un listado de algunos paquetes de _npm_ que no son los típicos (_webpack, babel, eslint, etc_) y que pueden ayudar a mejorar nuestra **"Developer Experience" (DX)**.
