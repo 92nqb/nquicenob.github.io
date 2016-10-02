@@ -2,7 +2,7 @@
 title: 8 paquetes de npm para que tu vida sea más fácil
 ---
 
-El ecosistema de **node js** es una auténtica locura, es increíble el ritmo al que se mueve la comunidad y la cantidad de librerías y herramientas que se publican todos los días. Aquí os traigo un listado de algunos paquetes de _npm_ que no son los típicos (_webpack, babel, eslint, etc_) y que creo que pueden ayudar a mejorar nuestra **"Developer Experience" (DX)**.
+El ecosistema de **node js** es una auténtica locura, es increíble el ritmo al que se mueve la comunidad y la cantidad de librerías y herramientas que se publican todos los días. Aquí os traigo un listado de algunos paquetes de _npm_ que no son los típicos (_webpack, babel, eslint, etc_) y que pueden ayudar a mejorar nuestra **"Developer Experience" (DX)**.
 
 ### 1. ["rimaraf"](https://github.com/isaacs/rimraf). Borrar archivos y directorios como 'rm -rf'.
 
