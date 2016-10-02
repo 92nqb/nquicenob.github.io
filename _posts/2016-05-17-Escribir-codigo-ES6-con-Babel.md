@@ -251,7 +251,7 @@ A la hora de transpilar código con Babel, debemos tener en cuenta:
   * Las características de ES6 que soporta nuestro motor de JS.
   * Las características de ES6 que queremos usar.
 
-Estas consideraciones nos permitirán quitar los plugin que no usamos en nuestro proyecto, llegando incluso a quitar el plugin de `transform-runtime` o el `babel-polyfill`, y asi obtener un con las dependencias mínimas :).
+Estas consideraciones nos permitirán quitar los plugin que no usamos en nuestro proyecto, llegando incluso a quitar el plugin de `transform-runtime` o el `babel-polyfill`, y asi obtener un proyecto con las dependencias mínimas :).
 
 #### Extra 1
 
