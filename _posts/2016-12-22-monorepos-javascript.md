@@ -49,22 +49,26 @@ Tenemos que ser conscientes de que no hay definido un patrón sobre cómo organi
 
 ### Monorepo "monolítico"
 
-**Este modelo se puede entender como un gran monolito que es fragmentado para su distribución mediante un proceso de "build"**. Para ver un ejemplo algo más práctico, observemos un poco el funcionamiento de [Lodash](https://lodash.com/).
+
+> Un Monorepo "monolítico" es un repositorio que contiene un módulo con mucha funcionalidad que es fragmentado en módulos independientes para su distribución.
+
+Para ver un ejemplo algo más práctico, observemos un poco el funcionamiento de [Lodash](https://lodash.com/).
 
 Lodash es una librería con un montón de funcionalidad que tiene como objetivo simplificar el desarrollo en JS, si queremos usar lodash en un proyecto basta con hacer un `npm install lodash --save` y después con un `require('lodash')` tendremos acceso a toda la funcionalidad de la librería bajo un *namespace*, hasta aquí es igual al resto de librerías, ahora bien, imaginemos que estamos desarrollando una aplicación front donde el peso de la misma es algo muy importante y queremos usar lodash, si solo usamos un par de utilidades de lodash incluir la librería entera nos supondría mucho código inútil en nuestro proyecto, para no cargarnos con este peso, lodash nos da la opción de utilizar sus [microlibrerías](https://www.npmjs.com/browse/keyword/lodash-modularized), estas microlibrerías son el resultado de fragmentar y distribuir la funcionalidad de lodash, dicha fragmentación se realiza mediante un proceso de "build" con el que parten el monolito en micromódulos que contiene solo una funcionalidad, lo que convierte a Lodash en un monorepo monolítico; recordemos el [objetivo](#que-es-un-monorepo):  *un único repositorio(repositorio de lodash), varios entregables(Lodash y sus microlibrerías)*.  
 
 <a name="monorepo-compuesto-por-modulos-totalmente-independientes"></a>
 
-### Monorepo compuesto por módulos totalmente independientes
+### Monorepo compuesto por módulos independientes
 
-Este modelo se basa en tener módulos totalmente independientes, es decir, **cada uno de los módulos que componen el monorepo podría ser extraídos del monorepo y debería garantizarse la continuidad de su ciclo de vida(build, testing, etc)**.
+> Un monorepo compuesto por módulos independientes es un repositorio en el que se desarrollan simultáneamente varios módulos, dichos módulos NO tiene la obligatoriedad de pertenecer al mismo repositorio.
 
-Primero aclaremos que debe tener un módulo para ser independiente:
+Primero aclaremos que debe tener un módulo de npm para ser independiente:
 
 * Su propio `packages.json`.
-* Sus propias dependencias.
-* Sus propios scripts.
-* Su propio registro en npm.
+* Sus propia definición de dependencias.
+* Sus propios "npm scripts".
+
+Cumpliendo lo anterior, podemos observar que cualquiera de los módulos que componen el repositorio podría ser extraído del monorepo teniendo garantías de poder tener continuidad en su ciclo de vida(install, build, testing, etc).
 
 Como aproximaciones a este modelo, aunque no totales podemos encontrar con proyectos de la talla de [Babel](https://github.com/babel/babel/) o [Jest](https://github.com/facebook/jest), digo no totales porque en ambos se opta por unificar el *"testing"* y el *"building"* de los módulos que los componen (en ambos casos unificar dichos procesos trae consigo muchísimos beneficios). Conviene señalar que en ambos proyectos la gestión de los módulos es realizada con [lerna](https://lernajs.io/).
 
@@ -168,7 +172,9 @@ Para más información sobre cómo trabajar con lerna os recomiendo su [document
 
 ### Monorepo basado en el "Alle model"
 
-Este modelo es usado en [pouchdb](https://github.com/pouchdb/pouchdb) y esta un poco a medio camino entre un [monorepo monolítico](#monorepo-monolitico) y un [monorepo compuesto por módulos totalmente independientes](#monorepo-compuesto-por-modulos-totalmente-independientes), en el se tiene *"vistas"* del repositorio, dichas vistas pueden ser distribuidas de forma independiente. Veamos en qué consiste:
+> Un monorepo basado en el "Alle model" es una variación de un "monorepo compuesto por módulos independientes" con la diferencia de que en este tipo de monorepo los módulos están  obligados a pertenecer al repositorio y a desarrollarse bajo un directorio `/node_modules` obteniendo como ventajas la posibilidad de definir dependencias globales entre los mismos y unicidad y simpleza en sus ficheros de configuración.
+
+Este tipo de monorepo es usado en [pouchdb](https://github.com/pouchdb/pouchdb), veamos un ejemplo más práctico:
 
 Partamos de un proyecto con la siguiente estructura:
 <pre>
